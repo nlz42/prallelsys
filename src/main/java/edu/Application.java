@@ -17,6 +17,14 @@ public class Application {
 	public static void main(String[] args) {
 		// create IceShop
 		shop = new IceCreamShop(3);
+		
+		for (int i=0;i<3;i++){
+			Thread thread = new Thread(new Customer("Customer"+i, shop) );
+			thread.start();
+		}
+		System.out.println("Now the really Day ;-) \n \n \n \n");
+		
+	
 		//Vormittags
 		//startDayTime(countGroup,everymin,mingroupsize,maxgroupsize)
 		System.out.println("Der Vormittag beginnt \n \n");

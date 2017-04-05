@@ -22,8 +22,15 @@ public class Application {
 			Thread thread = new Thread(new Customer("Customer"+i, shop) );
 			thread.start();
 		}
-		System.out.println("Now the really Day ;-) \n \n \n \n");
 		
+		
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // after this the test is over
+		System.out.println("Now the really Day ;-) \n \n \n \n");
 	
 		//Vormittags
 		//startDayTime(countGroup,everymin,mingroupsize,maxgroupsize)

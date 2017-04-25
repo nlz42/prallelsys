@@ -1,37 +1,36 @@
 package edu;
 
+import java.util.concurrent.Semaphore;
 
 public class IceCreamShop {
-	
-	private int freeEmployee = 3; // can served max three customer
-	
-	public IceCreamShop(int emplployes){
-		this.freeEmployee = emplployes;
+
+	private Semaphore emplployes = new Semaphore(3);
+
+	public IceCreamShop() {
 	}
-	
-	public synchronized void enter(Customer customer) {
-		System.out.println(customer.getName()+" betritt laden");
-		while (freeEmployee == 0){
-				try {
-					System.out.println(customer.getName()+" muss warten");
-					wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+
+	public void enter(Customer customer) {
+		try {
+			System.out.println(customer.getName() + " betritt laden");
+			emplployes.acquire();
+			System.out.println(customer.getName() + " wird bedient");
+
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		} 
+	}
+
+	public void leave(Customer customer) {
+		try {
+			System.out.println(customer.getName() + " geht glücklich");
+		} finally {
+			emplployes.release();
 		}
-		freeEmployee--;
 	}
-	
-	public synchronized void leave(Customer customer){
-		System.out.println(customer.getName()+" geht glücklich");
-		freeEmployee++;
-		notify();
-	}
-	
-	public void servedCustomer(Customer customer){
-		System.out.println(customer.getName()+" wird bedient");
+
+	public void servedCustomer(Customer customer) {
 		customer.sleep();
-		System.out.println(customer.getName()+" wurde bedient");
+		System.out.println(customer.getName() + " wurde bedient");
 	}
 
 }

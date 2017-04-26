@@ -18,11 +18,12 @@ public class Application {
 	public static void main(String[] args) {
 		// create IceShop
 		shop = new IceCreamShop();
+		Customer  customer = new Customer("Customer 0", shop);
 
 		for (int i = 0; i < 3; i++) {
 			int j = i;
 			pool.submit(() -> {
-				new Customer("Customer" + j, shop).run();
+				new Customer ("Customer"+ j,shop).customerDoStuff();
 			});
 		}
 
@@ -34,6 +35,8 @@ public class Application {
 		} // after this the test is over
 		System.out.println("Now the really Day ;-) \n \n \n \n");
 
+	
+		
 		// Vormittags
 		// startDayTime(countGroup,everymin,mingroupsize,maxgroupsize)
 		System.out.println("Der Vormittag beginnt \n \n");
@@ -61,7 +64,7 @@ public class Application {
 						countCustomer++;
 						int count = countCustomer;
 						pool.submit(() -> {
-							new Customer("Customer "+count, shop).run();
+							new Customer ("Customer"+ countCustomer,shop).customerDoStuff();
 						});
 					}
 				}

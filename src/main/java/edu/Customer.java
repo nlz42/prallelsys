@@ -1,6 +1,6 @@
 package edu;
 
-public class Customer  implements Runnable {
+public class Customer {
 	
 	private String name;
 	private IceCreamShop shop;
@@ -10,7 +10,7 @@ public class Customer  implements Runnable {
 		this.shop = shop;
 	}
 
-	public void run() {
+	public void customerDoStuff() {
 		shop.enter(this);
 		shop.servedCustomer(this);
 		shop.leave(this);
@@ -18,6 +18,10 @@ public class Customer  implements Runnable {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name){
+		this.name = name;
 	}
 
 	public void sleep() {

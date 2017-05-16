@@ -1,19 +1,13 @@
 package edu;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
 	
 	private String name;
-	private IceCreamShop shop;
+	private boolean hasGoldCard = false;
 	
-	public Customer(String name, IceCreamShop shop){
+	public Customer(String name, Boolean hasGoldCard){
 		this.name = name;
-		this.shop = shop;
-	}
-
-	public void customerDoStuff() {
-		shop.enter(this);
-		shop.servedCustomer(this);
-		shop.leave(this);
+		this.hasGoldCard = hasGoldCard;
 	}
 
 	public String getName() {
@@ -22,6 +16,14 @@ public class Customer {
 	
 	public void setName(String name){
 		this.name = name;
+	}	
+
+	public boolean isHasGoldCard() {
+		return hasGoldCard;
+	}
+
+	public void setHasGoldCard(boolean hasGoldCard) {
+		this.hasGoldCard = hasGoldCard;
 	}
 
 	public void sleep() {
@@ -36,7 +38,15 @@ public class Customer {
 			e.printStackTrace();
 		}		
 	}
-	
-	
 
+	@Override
+	public int compareTo(Customer other) {
+		if(this.hasGoldCard && !(other.hasGoldCard)){
+			return -1;
+		}
+		if(this.hasGoldCard && other.hasGoldCard){
+			return 0;
+		}
+		return 1;
+	}
 }
